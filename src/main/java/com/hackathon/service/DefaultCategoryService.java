@@ -22,4 +22,8 @@ public class DefaultCategoryService {
 		mongoDbConfig.getMongoTemplate().insert(new DefaultCategory("Sport"));
 
 	}
+
+	public void deleteDefaultCategory() throws Exception {
+		mongoDbConfig.getMongoTemplate().dropCollection(DefaultCategory.class);
+	}
 }

@@ -1,21 +1,27 @@
 package com.hackathon.service;
 
-import java.net.UnknownHostException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.MongoTemplate;
-
+import com.hackathon.configuration.MongoDBConfiguration;
 import com.hackathon.model.Currency;
-import com.mongodb.MongoClient;
 
+@Service
 public class CurrencyService {
 
-	public static void insertCurrency() throws UnknownHostException {
-		MongoOperations mongoOps = new MongoTemplate(new MongoClient(), "database");
-		mongoOps.insert(new Currency("EUR"));
-		mongoOps.insert(new Currency("GBP"));
-		mongoOps.insert(new Currency("USD"));
+	@Autowired
+	private MongoDBConfiguration mongoDbConfig;
 
+	public void insertCurrency() throws Exception {
+
+		mongoDbConfig.getMongoTemplate().insert(new Currency("EUR"));
+		mongoDbConfig.getMongoTemplate().insert(new Currency("GBP"));
+		mongoDbConfig.getMongoTemplate().insert(new Currency("USD"));
+
+	}
+
+	public void deleteCurrency() throws Exception {
+		mongoDbConfig.getMongoTemplate().dropCollection(Currency.class);
 	}
 
 }
