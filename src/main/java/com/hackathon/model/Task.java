@@ -16,7 +16,7 @@ public class Task {
 
 	public Task(@JsonProperty("id") String id, @JsonProperty("name") String name,
 			@JsonProperty("description") String description, @JsonProperty("amount") String amount,
-			@JsonProperty("status") String status, @JsonProperty("owners") List<String> owners, String category) {
+			@JsonProperty("status") String status, @JsonProperty("owners") List<String> owners, @JsonProperty("category")String category) {
 		this.id = id;
 		this.name = name;
 		this.description = description;

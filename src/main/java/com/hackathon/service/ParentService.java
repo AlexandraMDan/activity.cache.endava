@@ -24,8 +24,8 @@ public class ParentService {
 
 	public void insertParent() throws UnknownHostException {
 		List<Kid> children = new ArrayList<Kid>();
-		Kid kid = new Kid("Alex", "15");
-		Kid kid2 = new Kid("Raluca", "13");
+		Kid kid = new Kid("Alex", "15", new ArrayList<Task>());
+		Kid kid2 = new Kid("Raluca", "13", new ArrayList<Task>());
 
 		children.add(kid);
 		children.add(kid2);
