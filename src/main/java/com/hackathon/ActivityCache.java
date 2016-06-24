@@ -1,6 +1,7 @@
 package com.hackathon;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -8,12 +9,14 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hackathon.model.Category;
 import com.hackathon.model.Parent;
+import com.hackathon.model.Task;
 import com.hackathon.service.CategoryService;
 import com.hackathon.service.CurrencyService;
 import com.hackathon.service.ParentService;
@@ -22,6 +25,8 @@ import com.hackathon.service.ParentService;
 @RestController
 public class ActivityCache {
 	private static final Log log = LogFactory.getLog(ActivityCache.class);
+
+	private static final String USERNAME = "popescui";
 
 	@Autowired
 	private CurrencyService currencyService;
@@ -76,9 +81,25 @@ public class ActivityCache {
 		parentService.insertParent();
 	}
 
-	@RequestMapping("/getParent")
-	public Parent getPatent() throws UnknownHostException {
-		return parentService.getParent();
+	@CrossOrigin
+	@RequestMapping("/getChildrenTasks")
+	public List<Category> getChildrenTasks(@RequestParam(value = "name") String name) throws UnknownHostException {
+		List<Category> categories = new ArrayList<Category>();
+
+		for (Category category : parentService.getParent(USERNAME).getCategories()) {
+			List<Task> tasks = new ArrayList<Task>();
+			for (Task task : category.getTasks()) {
+				if (task.getOwners().contains(name)) {
+					tasks.add(task);
+				}
+			}
+
+			if (!tasks.isEmpty()) {
+				categories.add(new Category(category.getName(), category.getDescription(), tasks));
+			}
+		}
+
+		return categories;
 	}
 
 	// parentIntro

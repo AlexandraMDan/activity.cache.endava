@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+
 import com.hackathon.configuration.MongoDBConfiguration;
 import com.hackathon.model.Category;
 import com.hackathon.model.Currency;
 import com.hackathon.model.Kid;
 import com.hackathon.model.Parent;
 import com.hackathon.model.Task;
-import com.hackathon.model.TaskStatus;
 
 @Service
 public class ParentService {
@@ -38,11 +38,15 @@ public class ParentService {
 
 		List<String> owners = new ArrayList<String>();
 		owners.add(kid.getName());
+		owners.add(kid2.getName());
+		
+		List<String> owners2 = new ArrayList<String>();
+		owners2.add(kid2.getName());
 
 		List<Task> tasks = new ArrayList<Task>();
 		Task task = new Task("Pick up toys", "", 1, 1, "TODO", owners);
 		tasks.add(task);
-		tasks.add(new Task("Pick up toys 2", "", 2, 1, "DONE", owners));
+		tasks.add(new Task("Pick up toys 2", "", 2, 1, "DONE", owners2));
 
 		mongoDBConfig.getMongoTemplate().insert(new Parent(currency, "popescui", "I", "Popescu", children, 1520,
 				Arrays.asList(new Category("Chore", "Chores for kids", tasks))));
@@ -61,4 +65,8 @@ public class ParentService {
 		return parent;
 	}
 
+	public Parent getParent(String username) throws UnknownHostException {
+		return mongoDBConfig.getMongoTemplate().findOne(new Query(where("username").is(username)),
+				Parent.class);
+	}
 }
