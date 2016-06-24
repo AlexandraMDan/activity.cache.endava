@@ -9,12 +9,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hackathon.model.Kid;
 import com.hackathon.model.Parent;
 import com.hackathon.model.Task;
 import com.hackathon.service.KidService;
@@ -23,6 +25,7 @@ import com.hackathon.service.TaskService;
 
 @SpringBootApplication
 @RestController
+@CrossOrigin
 public class ActivityCache {
 	private static final Log log = LogFactory.getLog(ActivityCache.class);
 
@@ -67,6 +70,11 @@ public class ActivityCache {
 		taskService.insertTask(task);
 
 		return new ResponseEntity<Task>(task, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getKidTasks", method = RequestMethod.GET)
+	public Kid getKidTasks(@RequestParam(value = "name") String name) throws UnknownHostException {
+		return kidService.getKidTasks(name);
 	}
 
 	@Autowired
