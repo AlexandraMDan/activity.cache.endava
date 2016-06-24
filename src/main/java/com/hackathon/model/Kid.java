@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Kid {
 
 	private String name;
-	private double sold;
+	private String sold;
 
-	public Kid(@JsonProperty("name") String name, @JsonProperty("sold") double sold) {
+	public Kid(@JsonProperty("name") String name, @JsonProperty("sold") String sold) {
 		this.name = name;
 		this.sold = sold;
 	}
@@ -16,7 +16,7 @@ public class Kid {
 		return name;
 	}
 
-	public double getSold() {
+	public String getSold() {
 		return sold;
 	}
 
