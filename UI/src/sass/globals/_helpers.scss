@@ -1,0 +1,258 @@
+// Full-width
+//
+// .full-width - Forces an element to 100% of the parent container
+//
+// Styleguide Helpers.FullWidth
+.full-width {
+  @extend %full-width;
+}
+
+// Center-block
+//
+// .center-block - enters an element to the parent container.
+// In order to center an element, a size must be provided. Use one of the grid classes for this.
+//
+// markup:
+// <div class="pad-bottom-normal">
+//   <div class="{{modifier_class}} xs-4 bg-light-grey pad-around-normal">Center me</div>
+// </div>
+//
+// Styleguide Helpers.CenterBlock
+.center-block {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Page-wrapper
+//
+// .page-wrapper - Limit the width of the element to the maximum page width
+//
+// markup:
+// <div class="row bg-light-grey pad-around-normal">
+//  <div class="{{modifier_class}} bg-white pad-around-normal">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+// </div>
+//
+// Styleguide Helpers.PageWrapper
+
+.page-wrapper {
+  @extend %clearfix;
+  max-width: $page-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: map-get($spacing, medium);
+  padding-right: map-get($spacing, medium);
+}
+
+// Relative positioning
+//
+// .relative - Turn an element to CSS position: relative;
+//
+// Styleguide Helpers.RelativePositioning
+
+.relative {
+  position: relative;
+}
+
+// Absolute positioning
+//
+// .absolute-top-left - position an element to the top left corner of a relative parent
+// .absolute-top-right - position an element to the top right corner of a relative parent
+//
+// markup:
+// <div class="row relative pad-around-large text-color-white">
+//   <div class="bg-primary pad-around-normal {{modifier_class}}">Position me</div>
+// </div>
+//
+// Styleguide Helpers.AbsolutePositioning
+
+.absolute-top-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.absolute-top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.absolute-bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  .btn-icon {
+    display: block; //fix for firefox. inline block messes with the top positioning
+  }
+}
+
+// Visually Hidden elements
+//
+// .visually-hidden - Hides item from view leaving it available for screen readers
+//
+// markup:
+// <div class="row bg-light-grey pad-around-normal">
+//   <div class="{{modifier_class}}">Can you see me?</div>
+// </div>
+//
+// Styleguide Visibility.VisuallyHidden
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  @at-root th.visually-hidden {
+    position: static;
+    width: auto;
+  }
+}
+
+// .hidden
+//
+// hides item from view
+//
+// markup:
+// <div class="row bg-light-grey pad-around-normal">
+//   <div>You can see me</div>
+//   <div class="hidden">You can't see me</div>
+// </div>
+//
+// Styleguide Visibility.Hidden
+
+.hidden {
+  display: none;
+}
+
+// Force displays on items
+//
+// Change an element's default display style.
+//
+// markup:
+// <p>This is a paragraph with a span in it. Spans shouldn't render on new lines <span class="display-block">but now they do.</span?</p>
+// <hr>
+// <p class="display-inline">This is a paragraph followed by another just like it. They should be in two separate block underneath each other...</p>
+// <p class="display-inline">but they no longer are</p>
+// <hr>
+// <p>If some more control is required from <span>inline elements</span>, try an <span class="display-inline-block">inline-block element</span>
+//
+// Styleguide Helpers.DisplayStyles
+
+.display-block {
+  display: block;
+}
+.display-inline {
+  display: inline;
+}
+.display-inline-block {
+  display: inline-block;
+}
+
+// Inline vertical alingment
+//
+// markup:
+// <div class="bg-primary text-color-white pad-around-normal">
+//  <span class="pad-around-small bg-secondary" style="line-height: 3em">control element</span>
+//  <span class="pad-around-small vertical-top">top</span>
+//  <span class="pad-around-small vertical-middle">middle</span>
+//  <span class="pad-around-small vertical-bottom">bottom</span>
+// </div>
+//
+// Styleguide Helpers.VerticalAlign
+
+.vertical-middle {
+  vertical-align: middle;
+}
+.vertical-top {
+  vertical-align: top;
+}
+.vertical-bottom {
+  vertical-align: bottom;
+}
+
+// Vertical Align Blocks
+//
+// Align block elements vertically using a parent container that behaves like a table
+//
+// .vertical-align-block - Use on an element to turn it into a table-like container
+//
+// markup:
+// <div class="{{modifier_class}} row bg-light-grey text-color-white text-align-center full-width" style="height: 100px">
+//   <div class="vertical-top col xs-4">
+//     <div class="bg-primary pad-around-small">top</div>
+//   </div>
+//   <div class="vertical-middle col xs-4">
+//     <div class="bg-primary pad-around-small">middle</div>
+//   </div>
+//   <div class="vertical-bottom col xs-4">
+//     <div class="bg-primary pad-around-small">bottom</div>
+//   </div>
+// </div>
+//
+// Styleguide Helpers.VerticalAlignBlock
+
+.vertical-align-block {
+  display: table;
+  position: relative;
+  & > *, & > .col {
+    display: table-cell;
+    float: none;
+  }
+}
+
+// Remove default list properties
+//
+// .list-reset - remove the padding and decorations from ul / ol elements
+//
+// markup:
+// <ul class="{{modifier_class}}">
+//   <li>item</li>
+//   <li>item</li>
+// </ul>
+//
+// Styleguide Helpers.ListReset
+.list-reset {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+// Floating elements
+//
+// .float-right - float to the right
+// .float-left - float to the left
+// .float-none - remove float
+//
+// markup:
+// <div class="row text-align-center text-color-white border-bottom-thick-white">
+//   <div class="{{modifier_class}} bg-primary pad-around-small">float with no dimensions</div>
+// </div>
+// <div class="row text-align-center text-color-white">
+//   <div class="col xs-4 {{modifier_class}} bg-primary pad-around-small">float with dimensions</div>
+// </div>
+//
+// Styleguide Helpers.Floats
+
+.float-right, .col.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
+}
+.float-none, .col.float-none  {
+  float: none;
+}
+
+// Change to hover cursor
+//
+// .hover-pointer - change the cursor to a pointer when hovering over an element
+//
+// markup:
+// <h3 class="{{modifier_class}}">Hover me</h3>
+//
+// Styleguide Helpers.HoverPointer
+
+.hover-pointer:hover {
+  cursor: pointer;
+}

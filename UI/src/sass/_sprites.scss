@@ -1,0 +1,269 @@
+// add-new-blue
+$add-new-blue:(
+  width: 19px,
+  height: 19px,
+  position: 98.01324503311258% 33.368%
+);
+// add-new-white
+$add-new-white:(
+  width: 24px,
+  height: 24px,
+  position: 66.43835616438356% 81.66666666666667%
+);
+// burger-menu-white
+$burger-menu-white:(
+  width: 64px,
+  height: 64px,
+  position: 0 0
+);
+// calendar-dark
+$calendar-dark:(
+  width: 22px,
+  height: 21px,
+  position: 0 100%
+);
+// calendar-white
+$calendar-white:(
+  width: 24px,
+  height: 24px,
+  position: 50% 81.66666666666667%
+);
+// checkmark-green
+$checkmark-green:(
+  width: 24px,
+  height: 19px,
+  position: 84.93150684931507% 0
+);
+// checkmark-white
+$checkmark-white:(
+  width: 30px,
+  height: 30px,
+  position: 45.714285714285715% 56.14035087719298%
+);
+// chevron-down-dark
+$chevron-down-dark:(
+  width: 13px,
+  height: 9px,
+  position: 94.26751592356688% 44.97037037037037%
+);
+// chevron-down-white
+$chevron-down-white:(
+  width: 24px,
+  height: 24px,
+  position: 17.123287671232877% 81.66666666666667%
+);
+// chevron-right-dark
+$chevron-right-dark:(
+  width: 24px,
+  height: 24px,
+  position: 33.56164383561644% 81.66666666666667%
+);
+// chevron-right-white
+$chevron-right-white:(
+  width: 24px,
+  height: 24px,
+  position: 84.93150684931507% 15.833333333333334%
+);
+// chevron-up-dark
+$chevron-up-dark:(
+  width: 13px,
+  height: 9px,
+  position: 94.26751592356688% 51.63703703703705%
+);
+// clear-dark
+$clear-dark:(
+  width: 25px,
+  height: 25px,
+  position: 64.82758620689656% 53.78151260504202%
+);
+// clear-white
+$clear-white:(
+  width: 25px,
+  height: 25px,
+  position: 0 82.3529411764706%
+);
+// delete-red
+$delete-red:(
+  width: 19.71px,
+  height: 19.71px,
+  position: 98.47627919355912% 17.70053906187143%
+);
+// delete-white
+$delete-white:(
+  width: 24px,
+  height: 24px,
+  position: 84.93150684931507% 55.833333333333336%
+);
+// edit-dark
+$edit-dark:(
+  width: 30px,
+  height: 33px,
+  position: 24.285714285714285% 57.65765765765766%
+);
+// edit-white
+$edit-white:(
+  width: 24px,
+  height: 24px,
+  position: 84.93150684931507% 35.833333333333336%
+);
+// plus-dark
+$plus-dark:(
+  width: 24px,
+  height: 24px,
+  position: 84.93150684931507% 75.83333333333333%
+);
+// search-dark
+$search-dark:(
+  width: 22px,
+  height: 22px,
+  position: 100% 0
+);
+// setlist-thumb
+$setlist-thumb:(
+  width: 34px,
+  height: 34px,
+  position: 0 58.18181818181818%
+);
+// work-thumb
+$work-thumb:(
+  width: 60px,
+  height: 60px,
+  position: 58.18181818181818% 0
+);
+
+.icon {
+  @extend %icon;
+  &-add-new-blue {
+    @include generic-icon($add-new-blue);
+    &.icon-section + * {
+      margin-left: 19px;
+    }
+  }
+  &-add-new-white {
+    @include generic-icon($add-new-white);
+    &.icon-section + * {
+      margin-left: 24px;
+    }
+  }
+  &-burger-menu-white {
+    @include generic-icon($burger-menu-white);
+    &.icon-section + * {
+      margin-left: 64px;
+    }
+  }
+  &-calendar-dark {
+    @include generic-icon($calendar-dark);
+    &.icon-section + * {
+      margin-left: 22px;
+    }
+  }
+  &-calendar-white {
+    @include generic-icon($calendar-white);
+    &.icon-section + * {
+      margin-left: 24px;
+    }
+  }
+  &-checkmark-green {
+    @include generic-icon($checkmark-green);
+    &.icon-section + * {
+      margin-left: 24px;
+    }
+  }
+  &-checkmark-white {
+    @include generic-icon($checkmark-white);
+    &.icon-section + * {
+      margin-left: 30px;
+    }
+  }
+  &-chevron-down-dark {
+    @include generic-icon($chevron-down-dark);
+    &.icon-section + * {
+      margin-left: 13px;
+    }
+  }
+  &-chevron-down-white {
+    @include generic-icon($chevron-down-white);
+    &.icon-section + * {
+      margin-left: 24px;
+    }
+  }
+  &-chevron-right-dark {
+    @include generic-icon($chevron-right-dark);
+    &.icon-section + * {
+      margin-left: 24px;
+    }
+  }
+  &-chevron-right-white {
+    @include generic-icon($chevron-right-white);
+    &.icon-section + * {
+      margin-left: 24px;
+    }
+  }
+  &-chevron-up-dark {
+    @include generic-icon($chevron-up-dark);
+    &.icon-section + * {
+      margin-left: 13px;
+    }
+  }
+  &-clear-dark {
+    @include generic-icon($clear-dark);
+    &.icon-section + * {
+      margin-left: 25px;
+    }
+  }
+  &-clear-white {
+    @include generic-icon($clear-white);
+    &.icon-section + * {
+      margin-left: 25px;
+    }
+  }
+  &-delete-red {
+    @include generic-icon($delete-red);
+    &.icon-section + * {
+      margin-left: 19.71px;
+    }
+  }
+  &-delete-white {
+    @include generic-icon($delete-white);
+    &.icon-section + * {
+      margin-left: 24px;
+    }
+  }
+  &-edit-dark {
+    @include generic-icon($edit-dark);
+    &.icon-section + * {
+      margin-left: 30px;
+    }
+  }
+  &-edit-white {
+    @include generic-icon($edit-white);
+    &.icon-section + * {
+      margin-left: 24px;
+    }
+  }
+  &-plus-dark {
+    @include generic-icon($plus-dark);
+    &.icon-section + * {
+      margin-left: 24px;
+    }
+  }
+  &-search-dark {
+    @include generic-icon($search-dark);
+    &.icon-section + * {
+      margin-left: 22px;
+    }
+  }
+  &-setlist-thumb {
+    @include generic-icon($setlist-thumb);
+    &.icon-section + * {
+      margin-left: 34px;
+    }
+  }
+  &-work-thumb {
+    @include generic-icon($work-thumb);
+    &.icon-section + * {
+      margin-left: 60px;
+    }
+  }
+
+}

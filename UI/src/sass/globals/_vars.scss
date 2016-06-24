@@ -1,0 +1,84 @@
+
+
+
+$colors: (
+  white: #fff,
+  normal: #333,
+);
+
+$font-regular: arial, sans-serif;
+
+// grid configuration
+
+$columns: 12;
+$page-width: 960px;
+
+// sizes for margins and paddings
+
+$spacing: (
+  small: 5px,
+  normal: 10px,
+  medium: 20px,
+  large: 40px
+);
+
+/*
+  Screen sizes
+
+  map-get($screen-sizes, 'xs') - mobile phones in portrait mode
+  map-get($screen-sizes, 's') - landscape Phones and portrait tablets
+  map-get($screen-sizes, 'm') - tablets
+  map-get($screen-sizes, 'l') - landscape tablets and small screens
+  map-get($screen-sizes, 'xl') - large screens
+
+  Styleguide Variables.ScreenSizes
+
+*/
+
+$screen-sizes: (
+  xs: 0,
+  s: 480px,
+  m: 800px,
+  l: 1024px,
+  xl: 1200px
+);
+
+/* a map for the grid generator to run through and
+   generate row classes that handle different gutter sizes */
+$gutters: (
+  normal: map-get($spacing, 'normal'),
+  medium: map-get($spacing, 'medium')
+);
+
+$text-sizes: (
+  xlarge: 4rem,
+  large: 2rem,
+  medium: 1.3rem,
+  normal: 1rem,
+  small: 0.85rem
+);
+
+//generic sizes for elements like input fields, buttons, icons
+
+$large-height: 50px;
+$medium-height: 40px;
+$small-height: 30px;
+
+// animation properties
+$transition-speed: .3s;
+
+//form helpers
+$form-borders-width: 1px;
+
+// graphical helpers
+$shadow-light: 0px 1px 3px rgba(0,0,0,.15);
+$shadow-light-high: 1px 2px 5px rgba(0,0,0,.10);
+$shadow-light-low: 0px -2px 5px rgba(0,0,0,.10);
+
+// icon properties
+$sprites-url: url(../img/sprites.svg);
+/* icons have a 2px padding between them in the spritesheet
+   in order to avoid bleeding of adjacent elements.
+   Because sometimes svg icons get cut off, we compensate by
+   adding in a pixel. */
+$icon-negate-padding: -1px;

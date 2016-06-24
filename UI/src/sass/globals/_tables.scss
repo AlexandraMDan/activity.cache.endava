@@ -1,0 +1,188 @@
+table, .table {
+	border-collapse: separate;
+	border-spacing: 0;
+	width: 100%;
+
+	th, td {
+		padding: map-get($spacing, 'normal') map-get($spacing, 'small');
+		&:first-child {
+			padding-left: 0;
+		}
+
+		&:last-child {
+			padding-right: 0;
+		}
+	}
+	th {
+		text-align: left;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+
+	td {
+		position: relative;
+		border-top: 1px solid map-get($colors, 'dark-grey');
+		vertical-align: top;
+	}
+
+/*
+	.th-hidden
+
+	When a `th` needs to be hidden but still keep any sizing set on it for the `tbody` cells,
+	we just reduce the height to 0 so that the width is still used by the table.
+
+	Recommended to use a span with class `.visually-hidden` on the text so that it still remains
+	usable by screen readers.
+
+	markup:
+	<table>
+	  <thead>
+      <tr>
+        <th class="th-hidden"><span class="visually-hidden">Head 1</span></th>
+        <th class="th-hidden"><span class="visually-hidden">Head 2</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cell 1</td>
+        <td>Cell 2</td>
+      </tr>
+      <tr>
+        <td>Cell 3</td>
+        <td>Cell 4</td>
+      </tr>
+    </tbody>
+  </table>
+
+	Styleguide Tables.thHidden
+
+*/
+
+	th.th-hidden {
+		height: 0;
+		padding: 0;
+	}
+
+
+
+/*
+  .row-hover
+
+  Highlight rows and animate cells inside when hovering
+
+	markup:
+  <table class="row-hover">
+    <thead>
+      <tr>
+        <th>Head 1</th>
+        <th>Head 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cell 1</td>
+        <td>Cell 2</td>
+      </tr>
+      <tr>
+        <td>Cell 3</td>
+        <td>Cell 4</td>
+      </tr>
+    </tbody>
+  </table>
+
+	Styleguide Tables.RowHover
+
+*/
+	&.row-hover tbody tr {
+		background-color: transparent;
+		transition: background-color ($transition-speed / 2);
+		cursor: pointer;
+		td:first-child {
+			padding-left: map-get($spacing, 'normal');
+		}
+		td:last-child {
+			padding-right: map-get($spacing, 'normal');
+		}
+		&:hover {
+			background-color: map-get($colors, 'highlight');
+			td {
+				background-color: transparent;
+				color: white;
+				border-top-color: transparent;
+			}
+		}
+	}
+}
+/*
+	.cells-to-rows-m
+
+	When a table's cells won't fit on an "M" screen size, they
+	can be turned into rows with this class.
+
+	markup:
+	<table class="cells-to-rows-m">
+	  <thead>
+	    <tr>
+	      <th>Head 1</th>
+	      <th>Head 2</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td>Cell 1</td>
+	      <td>Cell 2</td>
+	    </tr>
+	    <tr>
+	      <td>Cell 3</td>
+	      <td>Cell 4</td>
+	    </tr>
+	  </tbody>
+	</table>
+
+	Styleguide Tables.CellsToRows
+
+*/
+
+@media screen and (max-width: map-get($screen-sizes, 'm') - 1){
+
+	.cells-to-rows-m {
+
+		thead, th {
+			display: none
+		}
+		tr {
+			display: block;
+			position: relative;
+			border-top: 1px solid map-get($colors, 'dark-grey');
+			padding: map-get($spacing, 'normal') 0;
+			&:first-child {
+				border-top: none;
+			}
+			&:hover td {
+				background: transparent;
+			}
+		}
+		td {
+			display: block;
+			border-top: none;
+			position: static;
+			padding: 0;
+		}
+
+		&.row-hover tbody tr {
+			td {
+				transition: none;
+				transform: none;
+			}
+			&:hover {
+				background-color: transparent;
+				td {
+					background-color: transparent;
+					transform: none;
+					color: map-get($colors, 'normal');
+					border-top-color: transparent;
+				}
+			}
+		}
+	}
+}

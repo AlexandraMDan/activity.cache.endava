@@ -1,0 +1,57 @@
+/*
+
+  .show-on-[screen size]
+
+  Shows the element on a specific range of screen sizes (for example, only on mobile or only on tablet)
+
+  The [size] keywords required are the names of the keys in the $screen-sizes map of the global _vars file.
+
+  markup:
+  <div class="row">Sample content:</div>
+  <div class="show-on-m">
+    Show me on "M" screen sizes
+  </div>
+
+  Styleguide Visibility.ShowOn
+
+*/
+
+/*
+  .show-until-[screen size]
+
+  Shows the element on all screens starting with the one specified in [size].
+
+  The [size] keywords required are the names of the keys in the $screen-sizes map of the global _vars file.
+
+  markup:
+  <div class="row">Sample content:</div>
+  <div class="show-until-m">
+    Show me until reaching "M" screen size
+  </div>
+
+  Styleguide Visibility.ShowUntil
+
+*/
+
+/*
+  .show-from-[screen size]
+
+  Shows the element up until the screen size specified in [size]
+
+  The [size] keywords required are the names of the keys in the $screen-sizes map of the global _vars file.
+
+  markup:
+  <div class="row">Sample content:</div>
+  <div class="show-from-m">
+    Show me beginning with "M" screen sizes
+  </div>
+
+  Styleguide Visibility.ShowFrom
+
+*/
+
+
+
+%show-placeholder {
+  display: none;
+};

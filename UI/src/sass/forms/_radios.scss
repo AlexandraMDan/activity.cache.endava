@@ -1,0 +1,20 @@
+input[type=radio] {
+  @extend input[type=checkbox];
+  & + label {
+    &:before, &:after {
+      border-radius: 100%;
+      width: 22px;
+      height: 22px;
+      display: block;
+      float: left;
+    }
+    &:after {
+      background: map-get($colors, 'primary');
+      border-color: map-get($colors, 'primary');
+      width: 10px;
+      height: 10px;
+      top: 6px;
+      left: 6px;
+    }
+  }
+}

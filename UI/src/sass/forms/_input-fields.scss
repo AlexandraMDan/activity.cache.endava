@@ -1,0 +1,162 @@
+.field {
+
+  // base styling
+  height: $large-height;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid map-get($colors, 'dark-grey');
+  background: transparent;
+  border-radius: 0;
+  margin: 0;
+  width: 100%;
+  font-size: map-get($text-sizes, 'medium');
+  transition: all $transition-speed;
+  &:hover {
+    cursor: pointer;
+  }
+  &::-ms-clear {
+    display: none;
+  }
+  &-small {
+    padding: 0 map-get($spacing, 'normal');
+    height: $small-height;
+    font-size: map-get($text-sizes, 'normal');
+  }
+  &-flat {
+    box-shadow: none;
+  }
+  &:focus {
+    outline: none;
+    border-bottom-color: map-get($colors, 'mark');
+    border-bottom-width: 2px;
+  }
+  &-invalid {
+    border-bottom-color: map-get($colors, 'alert');
+  }
+
+  // style the placeholder
+  @include style-input-placeholder(map-get($colors, 'normal'));
+  &::placeholder {
+    font-family: $font-regular;
+  }
+
+  /* >> special styling for date fields >> */
+
+  &[type=date] {
+    &::-webkit-inner-spin-button,
+    &::-webkit-calendar-picker-indicator {
+      display: none;
+      -webkit-appearance: none;
+    }
+  }
+
+  // set all date field pseudos to use the same font
+  &::-webkit-datetime-edit-fields-wrapper,
+  &::-webkit-calendar-picker-indicator {
+    font-size: map-get($text-sizes, 'medium');
+  }
+
+  /* << end special styling for date fields << */
+
+  /* .field-group
+    wrapper for each label/input pair */
+  &-group {
+    padding-top: map-get($spacing, 'medium');
+    padding-bottom: map-get($spacing, 'medium');
+  }
+
+  /* .field-label
+    generic label styling */
+  &-label {
+    display: block;
+    font-weight: normal;
+    font-size: map-get($text-sizes, 'small');
+    text-transform: uppercase;
+    // color: map-get($colors, 'dark');
+    text-align: left;
+    padding-bottom: map-get($spacing, 'small');
+  };
+
+  /* .field-secondary
+    primary or highlighted fields (the red ones) */
+  &-secondary {
+    color: map-get($colors, 'mark');
+    @include style-input-placeholder(white);
+  };
+
+  /* .field-white
+    input fields with white background */
+
+  &-white {
+    background-color: white;
+      @include style-input-placeholder(map-get($colors, 'normal'));
+  }
+
+  /* >> .field-icon >>
+    generic styling of input field icons */
+  &-icon {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+
+  };
+
+  /*
+
+  Input field with icon
+
+  markup:
+  <div class="field-group pad-row-medium">
+    <label for="performancePerformer" class="field-label">The performer was</label>
+    <div class="field-icon-container">
+      <input type="text" id="performancePerformer" class="field" placeholder="Add name or band name">
+      <span class="field-icon icon icon-search-dark" role="presentation"></span>
+    </div>
+  </div>
+
+  Styleguide Forms.InputWithIcon
+
+  */
+
+  &-icon-container {
+    position: relative;
+    .field {
+      padding-right: $large-height;
+    }
+  };
+  & ~ .icon {
+    top: 1px;
+    right: 1px;
+    width: $large-height;
+    height: auto;
+    bottom: 1px;
+    z-index: 1;
+    overflow:visible;
+    &:after {
+      top: 50%;
+      right: 50%;
+      left: auto;
+      width: 24px;
+      height: 24px;
+      margin-top: -12px;
+      margin-right: -12px;
+    }
+    /* add a little shadow on top of overflowing content so that it gets
+       cut off nicely underneath icons*/
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: $large-height;
+      width: map-get($spacing, 'normal');
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  /* << end .field-icon << */
+}

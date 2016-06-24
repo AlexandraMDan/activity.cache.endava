@@ -1,0 +1,24 @@
+%icon-pseudo {
+  content: "";
+  position: absolute;
+  top: $icon-negate-padding;
+  left: $icon-negate-padding;
+  right: $icon-negate-padding;
+  bottom: $icon-negate-padding;
+  background: $sprites-url no-repeat 0 0;
+}
+%icon {
+  width: 0;
+  height: 0;
+  text-indent: -9999px;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  &:after {
+    @extend %icon-pseudo;
+  }
+}

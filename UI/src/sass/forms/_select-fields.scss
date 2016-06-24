@@ -1,0 +1,18 @@
+.select {
+  @extend .field;
+  background-color: map-get($colors, 'primary');
+  color: white;
+  &::-ms-expand {
+    display: none;
+  }
+  option {
+    background-color: white;
+    font-size: map-get($text-sizes, 'medium');
+    color: map-get($colors, 'normal');
+  }
+  @at-root {
+    .field-icon-container .select {
+      padding-right: $large-height - 5px;
+    }
+  }
+}

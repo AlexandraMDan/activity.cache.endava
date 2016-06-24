@@ -1,0 +1,120 @@
+%full-width {
+  width: 100%;
+}
+
+%clearfix {
+  clear: both;
+  &:after {
+    clear: both;
+    content:"";
+    display: table;
+  }
+}
+
+// Grid
+//
+// Basic grid system has 12 columns and follows a basic structure of `.row` elements followed by `.col` children. Only direct descendants of `.row` elements will be floated.
+//
+// The grid has modifier classes for rows in order to accomodated different gutter widths
+//
+// .row-normal - 20px gutters
+// .row-medium - 40px gutters
+//
+// markup:
+// <div class="row {{modifier_class}} pad-bottom-normal">
+//   <div class="col xs-3"><div class="bg-dark-grey pad-around-normal">column</div></div>
+//   <div class="col xs-3"><div class="bg-dark-grey pad-around-normal">column</div></div>
+//   <div class="col xs-3"><div class="bg-dark-grey pad-around-normal">column</div></div>
+//   <div class="col xs-3"><div class="bg-dark-grey pad-around-normal">column</div></div>
+// </div>
+//
+// Styleguide Grid.Gutters
+
+.row {
+  @extend %clearfix;
+  display: block;
+  & > .col {
+    float: left;
+  }
+}
+
+@each $name, $size in $gutters {
+  .row-#{$name} {
+    @extend .row;
+    margin-left: -$size;
+    margin-right: -$size;
+    & > .col {
+      padding-left: $size;
+      padding-right: $size;
+    }
+    &.row-inset {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}
+
+// Column widths
+//
+// The grid is built using a "mobile first" approach
+//
+// Screen sizes are represented by one of the identifier classes: xs, s, m, l, xl.
+//
+// Resize the screen to see the changes
+//
+// markup:
+// <div class="row-normal pad-bottom-normal">
+//   <div class="col xs-4"><div class="bg-dark-grey pad-around-normal">XS</div></div>
+//   <div class="col xs-4"><div class="bg-dark-grey pad-around-normal">0</div></div>
+//   <div class="col xs-4"><div class="bg-dark-grey pad-around-normal">480px</div></div>
+// </div>
+// <div class="row-normal pad-bottom-normal">
+//   <div class="col s-4"><div class="bg-dark-grey pad-around-normal">S</div></div>
+//   <div class="col s-4"><div class="bg-dark-grey pad-around-normal">481px</div></div>
+//   <div class="col s-4"><div class="bg-dark-grey pad-around-normal">800px</div></div>
+// </div>
+// <div class="row-normal pad-bottom-normal">
+//   <div class="col m-4"><div class="bg-dark-grey pad-around-normal">M</div></div>
+//   <div class="col m-4"><div class="bg-dark-grey pad-around-normal">801px</div></div>
+//   <div class="col m-4"><div class="bg-dark-grey pad-around-normal">1024px</div></div>
+// </div>
+// <div class="row-normal pad-bottom-normal">
+//   <div class="col l-4"><div class="bg-dark-grey pad-around-normal">L</div></div>
+//   <div class="col l-4"><div class="bg-dark-grey pad-around-normal">1025px</div></div>
+//   <div class="col l-4"><div class="bg-dark-grey pad-around-normal">1200px</div></div>
+// </div>
+// <div class="row-normal pad-bottom-normal">
+//   <div class="col xl-4"><div class="bg-dark-grey pad-around-normal">XL</div></div>
+//   <div class="col xl-4"><div class="bg-dark-grey pad-around-normal">1201px</div></div>
+//   <div class="col xl-4"><div class="bg-dark-grey pad-around-normal">+</div></div>
+// </div>
+//
+// Styleguide Grid.Columns
+
+
+@mixin grid($screen){
+  @for $i from 1 through $columns {
+    .#{$screen}-#{$i} {
+      width: percentage($i / $columns);
+    }
+  }
+}
+@each $screen, $size in $screen-sizes {
+  @if $size > 0 {
+    @for $i from 1 through $columns {
+      .#{$screen}-#{$i} {
+        @extend %full-width;
+      }
+    }
+  }
+}
+@each $screen, $size in $screen-sizes {
+  @if $size > 0 {
+    @media screen and (min-width: $size) {
+      @include grid($screen);
+    }
+  }
+  @else {
+    @include grid($screen);
+  }
+}

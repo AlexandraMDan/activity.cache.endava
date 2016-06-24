@@ -1,0 +1,68 @@
+input[type=checkbox] {
+  @extend .visually-hidden;
+  &:focus+label {
+    &:after, &:before {
+      box-shadow: 0 0 5px rgba(map-get($colors, 'normal'), 50%);
+    }
+  }
+  & + label {
+    position: relative;
+    display: block;
+    line-height: map-get($checkmark-white, 'height');
+    padding-right: map-get($spacing, 'medium');
+    font-size: map-get($text-sizes, 'normal');
+    padding-bottom: map-get($spacing, 'normal');
+    margin: 0;
+    padding-top: 0;
+    &:hover {
+      cursor: pointer;
+    }
+    &:before {
+      content: "";
+      display: inline-block;
+      width: map-get($checkmark-white, 'width');
+      height: map-get($checkmark-white, 'height');
+      line-height: map-get($checkmark-white, 'height');
+      vertical-align: text-bottom;
+      background: white;
+      border: 2px solid map-get($colors, 'dark-grey');
+      margin-right: map-get($spacing, 'normal');
+    }
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: map-get($checkmark-white, 'width');
+      height: map-get($checkmark-white, 'height');
+      transform: scale(0);
+      background: map-get($colors, 'primary') $sprites-url map-get($checkmark-white, 'position') no-repeat;
+      border: 2px solid map-get($colors, 'primary');
+      transition: transform $transition-speed;
+    }
+    @at-root {
+      .lt-ie10 & {
+        &:after {
+          display: none;
+          top: 9px;
+        }
+      }
+
+    }
+  }
+  &:checked + label {
+    &:after {
+      transform: scale(1);
+
+    }
+    @at-root {
+      .lt-ie10 & {
+        &:after {
+          display: block;
+        }
+      }
+
+    }
+  }
+}

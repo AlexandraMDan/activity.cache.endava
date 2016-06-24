@@ -1,0 +1,21 @@
+{{#shapes}}
+{{#selector.shape}}// {{expression}}{{/selector.shape}}
+{{#selector.shape}}${{expression}}{{/selector.shape}}:(
+  width: {{width.outer}}px,
+  height: {{height.outer}}px,
+  position: {{position.relative.xy}}
+);
+{{/shapes}}
+
+.icon {
+  @extend %icon;
+  {{#shapes}}
+  {{#selector.shape}}&-{{expression}}{{/selector.shape}} {
+    {{#selector.shape}}@include generic-icon(${{expression}});{{/selector.shape}}
+    &.icon-section + * {
+      margin-left: {{width.outer}}px;
+    }
+  }
+  {{/shapes}}
+
+}

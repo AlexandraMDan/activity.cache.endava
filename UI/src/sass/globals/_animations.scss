@@ -1,0 +1,36 @@
+@keyframes wobble-right {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes wobble-top {
+  0% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  50% {
+    transform: translate3d(0px, -3px, 0px);
+  }
+  100% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+}
+
+@keyframes circle {
+  from {
+		transform: rotate(0deg)
+		           translate(-2px)
+		           rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg)
+		           translate(-2px)
+		           rotate(-360deg);
+	}
+}

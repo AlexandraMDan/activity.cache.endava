@@ -1,0 +1,128 @@
+
+// Buttons
+//
+// Buttons are primarily using the primary brand color for the background and white color for text.
+// They also have two extra sizes: `.btn-large` and `.btn-small`
+//
+// .btn-transparent - no borders or background
+// .btn-outline - 2px primary color border and no background
+//
+// markup:
+// <button class="btn {{modifier_class}}">Button</button>
+//
+// Styleguide Forms.Buttons
+
+
+.btn {
+  -webkit-appearance: none;
+  background-color: map-get($colors, 'primary');
+  border: $form-borders-width solid transparent;
+  border-radius: $medium-height;
+  color: white;
+  display: inline-block;
+  font-family: $font-regular;
+  font-weight: normal;
+  font-size: map-get($text-sizes, 'normal');
+  padding: 0.55rem 1.11rem;
+  text-decoration: none;
+  transition: all .3s;
+  text-align: center;
+  text-transform: uppercase;
+
+  // Buttons with icons
+  //
+  // Icons can be added as inline elemnts or buttons by themselves.
+  //
+  // Note: if `btn-icon` class is added, the text in the button will no longer
+  // be visible but will still be there for screen readers
+  //
+  // markup:
+  // <div class="row-medium">
+  //   <div class="col m-6 text-align-center">
+  //     <button class="btn btn-transparent"><i class="icon icon-edit-dark"></i>Edit Button</button>
+  //   </div>
+  //   <div class="col m-6 text-align-center">
+  //     <button class="btn btn-icon btn-transparent"><i class="icon icon-edit-dark"></i>Edit Button</button>
+  //   </div>
+  // </div>
+  //
+  // Styleguide Forms.ButtonsWithIcons
+  .icon {
+    display: inline-block;
+    margin-top: -2px;
+    margin-right: map-get($spacing, 'small');
+  }
+
+  &:hover {
+    text-decoration: none;
+    cursor: pointer;
+    background-color: map-get($colors, 'primary-dark');
+  }
+  &:disabled {
+    opacity: .35;
+    font-family: $font-regular;
+    font-weight: normal;
+  }
+
+  // Button sizes
+  //
+  // There are three button sizes available, only two of which require modifiers
+  //
+  // .btn-small - Small button size
+  // .btn-large - Large button size
+  //
+  // markup:
+  // <button class="btn {{modifier_class}}">Button</button>
+  //
+  // Styleguide Forms.ButtonSizes
+
+  &-small {
+    font-size: map-get($text-sizes, 'normal');
+    min-height: $small-height;
+    line-height: $small-height - $form-borders-width;
+    padding: 0px ($small-height / 2);
+  }
+  &-large {
+    min-height: $large-height;
+    line-height: $large-height - $form-borders-width;
+    font-size: map-get($text-sizes, 'medium');
+
+  }
+  &-transparent {
+    background-color: transparent;
+    border-color: transparent;
+    color: map-get($colors, 'dark');
+    padding: 0 map-get($spacing, 'small');
+    &:hover {
+      background-color: transparent;
+      text-decoration: underline;
+    }
+  }
+  
+  &-outline {
+    border: $form-borders-width solid map-get($colors, 'primary');
+    color: map-get($colors, 'primary');
+    background-color: transparent;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &-icon {
+    padding: 0;
+    height: $small-height;
+    line-height: $small-height;
+    width: $small-height;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+    .icon {
+      margin-right: 0;
+      margin-top: -1px;
+    }
+    &:hover {
+      background-color: transparent;
+    }
+  }
+};

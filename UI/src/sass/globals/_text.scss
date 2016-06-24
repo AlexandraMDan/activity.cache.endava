@@ -1,0 +1,141 @@
+// text sizes
+
+/*
+  Text sizes
+
+  Text sizes are available on basic html tags (e.g. h1..h3, p) as well as classes for styling any other element to look like their semantic counterparts.
+
+  markup:
+  <div class="row">
+    <div class="col xs-6">
+      <h1>Heading 1</h1>
+      <h2>Heading 2</h2>
+      <h3>Heading 3</h3>
+      <p>Paragraph</p>
+      <p><small>Small text</small></p>
+    </div>
+    <div class="col xs-6">
+      <div class="h1">Heading 1 div</div>
+      <div class="h2">Heading 2 div</div>
+      <div class="h3">Heading 3 div</div>
+      <div class="p">Paragraph div</div>
+      <div class="p text-small">Small text div</div>
+    </div>
+  </div>
+
+  Styleguide Text.Headings
+
+*/
+
+body, ul, ol, li, input, button, input[type="date"], select {
+  font-size: 18px;
+  font-family: $font-regular;
+}
+
+h1, .h1 {
+  font-size: map-get($text-sizes, 'xlarge');
+  margin: 1em 0;
+  font-weight: normal;
+  &-double {
+    font-size: map-get($text-sizes, 'xlarge') * 2;
+  }
+}
+h2, .h2 {
+  font-size: map-get($text-sizes, 'large');
+  margin: 1em 0;
+  font-weight: normal;
+  &-double {
+    font-size: map-get($text-sizes, 'large') * 2;
+  }
+}
+h3, .h3 {
+  font-size: map-get($text-sizes, 'medium');
+  margin: 1em 0;
+  font-weight: normal;
+  &-double {
+    font-size: map-get($text-sizes, 'medium') * 2;
+  }
+}
+p, .p {
+  margin: 1em 0;
+  font-size: map-get($text-sizes, 'normal');
+  font-weight: normal;
+}
+small, .text-small {
+  font-size: map-get($text-sizes, 'small');
+}
+body {
+  font-size: 16px;
+}
+/*
+  Text weights
+
+  .text-strong - Stronger text weight
+  .text-light - Thin text weight
+  .text-bold - Bold text weight
+
+  markup:
+  <p><span class="{{modifier_class}}">lorem</span> ipsum dolor sit amet</p>
+
+  Styleguide Text.Weights
+
+*/
+strong, b, .text-strong {
+  font-weight: bold;
+}
+.text-bold {
+  font-weight: bold;
+}
+.text-regular {
+  font-family: $font-regular;
+}
+
+/*
+  Text transforms
+
+  .text-uppercase - Transforms all letters to uppercase
+
+  markup:
+  <p class="{{modifier_class}}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, adipisci.</p>
+
+  Styleguide Text.Transforms
+
+*/
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+/*
+  .text-no-margin
+
+  For when you need a text size without the margins and paddings that come with it
+
+  markup:
+  <div class="pad-sides-normal border-around-thin-dark-grey">
+    <h2>Normal heading 2</h2>
+  </div>
+  <div class="pad-sides-normal border-around-thin-dark-grey">
+    <h2 class="text-no-spacing"> No margin heading 2</h2>
+  </div>
+
+  Styleguide Text.TextNoSpacing
+*/
+
+.text-no-spacing {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+// text alignment
+.text-align-left {
+  text-align: left;
+}
+.text-align-right {
+  text-align: right;
+}
+.text-align-center {
+  text-align: center;
+}

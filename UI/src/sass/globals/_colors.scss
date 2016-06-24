@@ -1,0 +1,75 @@
+/*
+  Primary background color
+
+  markup:
+  <div class="bg-primary-light pad-around-normal text-color-white">.bg-primary-light</div>
+  <div class="bg-primary pad-around-normal text-color-white ">.bg-primary</div>
+  <div class="bg-primary-dark pad-around-normal text-color-white">.bg-primary-dark</div>
+
+  Styleguide Colors.Background1
+*/
+
+/*
+  Secondary background color
+
+  markup:
+  <div class="bg-secondary pad-around-normal text-color-white ">.bg-secondary</div>
+  <div class="bg-secondary-dark pad-around-normal text-color-white">.bg-secondary-dark</div>
+
+  Styleguide Colors.Background2
+*/
+
+
+/*
+  Highlight color
+
+  markup:
+  <div class="bg-highlight pad-around-normal text-color-white ">.bg-highlight</div>
+  <div class="bg-highlight-dark pad-around-normal text-color-white">.bg-highlight-dark</div>
+
+  Styleguide Colors.Background3
+*/
+
+
+/*
+  Mark color
+
+  markup:
+  <div class="bg-mark pad-around-normal text-color-normal ">.bg-mark</div>
+  <div class="bg-mark-light pad-around-normal text-color-normal">.bg-mark-light</div>
+
+  Styleguide Colors.Background4
+*/
+
+
+/*
+  Grey variations
+
+  markup:
+  <div class="bg-light-grey pad-around-normal text-color-normal">.bg-light-grey</div>
+  <div class="bg-medium-grey pad-around-normal text-color-normal">.bg-medium-grey</div>
+  <div class="bg-dark-grey pad-around-normal text-color-normal">.bg-dark-grey</div>
+  <div class="bg-dark pad-around-normal text-color-white">.bg-dark</div>
+  <div class="bg-normal pad-around-normal text-color-white">.bg-normal (same as default text color)</div>
+
+  Styleguide Colors.Background5
+*/
+
+@each $label, $color in $colors {
+  .bg-#{$label} {
+    background-color: $color;
+  }
+}
+
+
+.faded {
+  opacity: .5;
+}
+
+// text colors
+
+@each $label, $color in $colors {
+  .text-color-#{$label} {
+    color: $color;
+  }
+}

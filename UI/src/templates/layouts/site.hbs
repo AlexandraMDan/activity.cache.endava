@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ title }}{{#if page.title}} - {{page.title}}{{/if}}</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="author" content="{{ site.author }}" />
+    <meta name="description" content="{{ site.meta.description }}" />
+    <meta name="keywords" content="{{ site.meta.keywords }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
+    {{#if production}}
+      <link rel="stylesheet" href="/assets/css/styles.min.css" />
+    {{else}}
+      <link rel="stylesheet" href="/assets/css/styles.css" />
+    {{/if}}
+
+  </head>
+
+  <body class="bg-medium-grey">
+
+    {{> header }}
+
+    <main role="main" class="wrapper main-content" id="maincontent">
+
+      {{> body}}
+
+    </main>
+
+    {{> footer}}
+
+  </body>
+
+</html>

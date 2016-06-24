@@ -1,0 +1,25 @@
+<div class="main-logo">
+  <a href="{{logo.href}}"><img src="{{logo.image}}" alt="{{logo.imageAlt}}"></a>
+</div>
+
+<button class="main-menu-trigger" id="MainMenuTrigger">Show/hide menu</button>
+
+<nav class="main-menu" id="MainMenu">
+  <div class="row text-align-left pad-around-medium show-until-m">
+    <a href="{{logo.href}}" class="float-left"><img src="{{logo.image}}" alt="{{logo.imageAlt}}" width="80"></a>
+  </div>
+
+  <ul>
+
+    {{#if setListNav}}
+      {{#each setListNav}}
+        <li><a href="{{href}}">{{name}}</a></li>
+      {{/each}}
+    {{/if}}
+
+    {{#each mainNavigation}}
+      <li><a href="{{href}}" target="_self">{{name}}</a></li>
+    {{/each}}
+
+  </ul>
+</nav>

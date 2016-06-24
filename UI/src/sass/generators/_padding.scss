@@ -1,0 +1,38 @@
+/* generate padding classes for elements
+
+.pad-[side]-[size]
+
+  * [side] can be one of the following: left, right, top, bottom, row, sides, around
+    - .pad-left...pad-bottom - first four are self explanatory
+    - .pad-row means adding padding to top and bottom
+    - .pad-sides means adding padding padding to left and right
+    - .pad-around means all sides
+
+  * [size] gets values from the global $gutters variable and uses the generic notation:
+    e.g.: small, normal, medium, large */
+
+@each $name, $size in $spacing {
+  .pad-left-#{$name} {
+    padding-left: $size;
+  }
+  .pad-right-#{$name} {
+    padding-right: $size;
+  }
+  .pad-top-#{$name} {
+    padding-top: $size;
+  }
+  .pad-bottom-#{$name} {
+    padding-bottom: $size;
+  }
+  .pad-sides-#{$name} {
+    padding-left: $size;
+    padding-right: $size;
+  }
+  .pad-row-#{$name} {
+    padding-top: $size;
+    padding-bottom: $size;
+  }
+  .pad-around-#{$name} {
+    padding: $size;
+  }
+}

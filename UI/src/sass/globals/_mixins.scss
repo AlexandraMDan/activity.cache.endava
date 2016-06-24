@@ -1,0 +1,64 @@
+@mixin style-input-placeholder($color) {
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $color;
+    opacity: 1;
+  }
+  &::-moz-placeholder { /* Firefox 19+ */
+    color: $color;
+    opacity: 1;
+  }
+  &:-ms-input-placeholder { /* IE 10+ */
+    color: $color;
+    opacity: 1;
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+    color: $color;
+    opacity: 1;
+  }
+};
+
+@mixin generic-icon($icon-name) {
+  width: map-get($icon-name, 'width');
+  height: map-get($icon-name, 'height');
+  &:after {
+    background-position: map-get($icon-name, 'position');
+  }
+};
+
+
+@mixin rotate-icon($icon-name) {
+  width: map-get($icon-name, 'width');
+  height: map-get($icon-name, 'height');
+  &:after {
+    background-position: map-get($icon-name, 'position');
+    transition: transform $transition-speed;
+  }
+  &.on {
+    &:after {
+      transform: translateZ(0) rotate(0deg);
+    }
+  }
+  &.off {
+    &:after {
+      transform: rotate(180deg);
+    }
+    &:before {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+@mixin respond-from($media) {
+  @each $screen, $size in $screen-sizes {
+    @if $media == $screen {
+      @media screen and (min-width: $size) { @content; }
+    }
+  }
+}
+@mixin respond-to($media) {
+  @each $screen, $size in $screen-sizes {
+    @if $media == $screen {
+      @media screen and (max-width: $size) { @content; }
+    }
+  }
+}
