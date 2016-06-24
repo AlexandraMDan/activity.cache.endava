@@ -1,20 +1,22 @@
 package com.hackathon.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Parent {
 	private Currency currency;
 	private String username;
-	private Kid kid;
+	private List<Kid> children;
 	private double sold;
 	private Category category;
 
 	public Parent(@JsonProperty("currency") Currency currency, @JsonProperty("username") String username,
-			@JsonProperty("kid") Kid kid, @JsonProperty("sold") double sold,
+			@JsonProperty("kid") List<Kid> children, @JsonProperty("sold") double sold,
 			@JsonProperty("category") Category category) {
 		this.currency = currency;
 		this.username = username;
-		this.kid = kid;
+		this.children = children;
 		this.sold = sold;
 		this.category = category;
 	}
@@ -27,8 +29,8 @@ public class Parent {
 		return username;
 	}
 
-	public Kid getKid() {
-		return kid;
+	public List<Kid> getChildren() {
+		return children;
 	}
 
 	public double getSold() {
@@ -41,7 +43,7 @@ public class Parent {
 
 	@Override
 	public String toString() {
-		return "Parent [currency=" + currency + ", username=" + username + ", kid=" + kid + ", sold=" + sold
+		return "Parent [currency=" + currency + ", username=" + username + ", kid=" + children + ", sold=" + sold
 				+ ", category=" + category + "]";
 	}
 

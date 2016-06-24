@@ -1,16 +1,19 @@
 package com.hackathon;
 
 import java.net.UnknownHostException;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.hackathon.service.CurrencyService;
-import com.hackathon.service.DefaultCategoryService;
+import com.hackathon.model.Category;
+import com.hackathon.service.CategoryService;
 
 @SpringBootApplication
 @RestController
@@ -18,9 +21,9 @@ public class ActivityCache {
 	private static final Log log = LogFactory.getLog(ActivityCache.class);
 
 	@Autowired
-	private DefaultCategoryService defaultCategoryService;
-	@Autowired
 	private CurrencyService currencyService;
+	@Autowired
+	private CategoryService defaultCategoryService;
 
 	public static void main(String[] args) throws Exception {
 
@@ -38,7 +41,12 @@ public class ActivityCache {
 		} catch (Exception e) {
 			log.error("Exception when inserting default categories.", e);
 		}
-	}
+	}	
+	
+	@RequestMapping("/getCategories")
+    public List<Category> getCategories(@RequestParam(value="username") String username, @RequestParam(value="kid") String kid) throws UnknownHostException {
+        return defaultCategoryService.getCategories(username, kid);
+    }
 
 	@Autowired
 	private void insertDefaultCurrency() {
