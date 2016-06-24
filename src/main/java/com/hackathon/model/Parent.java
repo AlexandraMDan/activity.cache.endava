@@ -43,17 +43,17 @@ public class Parent {
 		return lastname;
 	}
 
-	@Override
-	public String toString() {
-		return "Parent [ username=" + username + ", kid=" + children + ", sold=" + sold + "]";
-	}
-
 	public List<Task> getTasks() {
 		return tasks;
 	}
 
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+
+	@Override
+	public String toString() {
+		return "Parent [ username=" + username + ", children=" + children + ", sold=" + sold + ", tasks=" + tasks + "]";
 	}
 
 }

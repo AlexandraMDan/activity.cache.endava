@@ -34,9 +34,9 @@ public class ParentService {
 		owners.add(kid.getName());
 
 		List<Task> tasks = new ArrayList<Task>();
-		Task task = new Task("1","Pick up toys", "", "100", "TODO", owners, "Sport");
+		Task task = new Task("1", "Pick up toys", "", "100", "TODO", owners, "Sport");
 		tasks.add(task);
-		tasks.add(new Task("2","Pick up toys 2", "", "100", "DONE", owners, "Chores"));
+		tasks.add(new Task("2", "Pick up toys 2", "", "100", "DONE", owners, "Chores"));
 
 		mongoDBConfig.getMongoTemplate().insert(new Parent("popescui", "I", "Popescu", children, "1520", tasks));
 	}
@@ -47,13 +47,21 @@ public class ParentService {
 	}
 
 	public Parent getParentIntroDetails(String username) throws UnknownHostException {
-		Query parentByUserQuery = Query.query(Criteria.where("username").is(username));
+		Query query = Query.query(Criteria.where("username").is(username));
 
-		Parent parent = mongoDBConfig.getMongoTemplate().findOne(parentByUserQuery, Parent.class);
+		Parent parent = mongoDBConfig.getMongoTemplate().findOne(query, Parent.class);
 
-		List<Kid> children = parent.getChildren();
+		List<Task> doneTasks = new ArrayList<>();
+		if (parent.getTasks() != null) {
+			for (Task task : parent.getTasks()) {
+				if ("DONE".equals(task.getStatus())) {
+					doneTasks.add(task);
+				}
+			}
+		}
 
-		// parent.getCategories()
+		parent.setTasks(doneTasks);
+
 		return parent;
 	}
 

@@ -82,4 +82,11 @@ public class Task {
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		// TODO owners
+		return "Task [ name=" + name + ", description=" + description + ", amount=" + amount + ", status=" + status
+				+ ", category=" + "]";
+	}
+
 }
