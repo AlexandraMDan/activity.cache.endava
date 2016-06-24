@@ -4,24 +4,26 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
-
 import com.hackathon.configuration.MongoDBConfiguration;
 import com.hackathon.model.Category;
 import com.hackathon.model.Currency;
 import com.hackathon.model.Kid;
 import com.hackathon.model.Parent;
 import com.hackathon.model.Task;
+import com.hackathon.model.TaskStatus;
 
 @Service
 public class ParentService {
 
 	@Autowired
-	private MongoDBConfiguration mongoDbConfig;
+	private MongoDBConfiguration mongoDBConfig;
 	@Autowired
 	private CurrencyService currencyService;
 
@@ -40,14 +42,23 @@ public class ParentService {
 		List<Task> tasks = new ArrayList<Task>();
 		Task task = new Task("Pick up toys", "", 1, 1, "TODO", owners);
 		tasks.add(task);
+		tasks.add(new Task("Pick up toys 2", "", 2, 1, "DONE", owners));
 
-		mongoDbConfig.getMongoTemplate().insert(
-				new Parent(currency, "popescui", children, 1520, new Category("Chore", "Chores for kids", tasks)));
+		mongoDBConfig.getMongoTemplate().insert(new Parent(currency, "popescui", "I", "Popescu", children, 1520,
+				Arrays.asList(new Category("Chore", "Chores for kids", tasks))));
 	}
 
 	public Parent getParent() throws UnknownHostException {
-		return mongoDbConfig.getMongoTemplate().findOne(new Query(where("category.tasks.owners").is("Alex")), Parent.class);
+		return mongoDBConfig.getMongoTemplate().findOne(new Query(where("category.tasks.owners").is("Alex")),
+				Parent.class);
 	}
-	// db.getCollection("restaurants").find(or(eq("cuisine", "Italian"),
-	// eq("address.zipcode", "10075")));
+
+	public Parent getParentIntroDetails(String username) throws UnknownHostException {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username).and("categories.tasks.status").is("DONE"));
+		Parent parent = mongoDBConfig.getMongoTemplate().findOne(query, Parent.class);
+
+		return parent;
+	}
+
 }

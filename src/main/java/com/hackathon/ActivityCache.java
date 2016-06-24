@@ -80,4 +80,11 @@ public class ActivityCache {
 	public Parent getPatent() throws UnknownHostException {
 		return parentService.getParent();
 	}
+
+	// parentIntro
+	@RequestMapping("/parentIntro")
+	public Parent getParentIntro(@RequestParam(value = "username") String username) throws UnknownHostException {
+		return parentService.getParentIntroDetails(username);
+	}
+
 }
