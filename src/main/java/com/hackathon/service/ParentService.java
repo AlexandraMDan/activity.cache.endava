@@ -34,9 +34,9 @@ public class ParentService {
 		owners.add(kid.getName());
 
 		List<Task> tasks = new ArrayList<Task>();
-		Task task = new Task("1", "Pick up toys", "", "100", "TODO", owners, "Sport");
+		Task task = new Task("1","Pick up toys", "", "100", "TODO", owners, "Sport");
 		tasks.add(task);
-		tasks.add(new Task("2", "Pick up toys 2", "", "100", "DONE", owners, "Chores"));
+		tasks.add(new Task("2","Pick up toys 2", "", "100", "DONE", owners, "Chores"));
 
 		mongoDBConfig.getMongoTemplate().insert(new Parent("popescui", "I", "Popescu", children, "1520", tasks));
 	}
