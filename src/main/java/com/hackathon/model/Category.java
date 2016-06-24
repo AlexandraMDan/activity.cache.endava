@@ -6,9 +6,9 @@ public class Category {
 
 	private String name;
 	private String description;
-	private List<String> tasks;
+	private List<Task> tasks;
 
-	public Category(String name, String description, List<String> tasks) {
+	public Category(String name, String description, List<Task> tasks) {
 		this.setName(name);
 		this.setDescription(description);
 		this.setTasks(tasks);
@@ -30,11 +30,11 @@ public class Category {
 		this.description = description;
 	}
 
-	public List<String> getTasks() {
+	public List<Task> getTasks() {
 		return tasks;
 	}
 
-	public void setTasks(List<String> tasks) {
+	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
 

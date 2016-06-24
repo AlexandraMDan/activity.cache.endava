@@ -11,9 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.hackathon.service.CurrencyService;
+
 import com.hackathon.model.Category;
+import com.hackathon.model.Parent;
 import com.hackathon.service.CategoryService;
+import com.hackathon.service.CurrencyService;
+import com.hackathon.service.ParentService;
 
 @SpringBootApplication
 @RestController
@@ -24,6 +27,8 @@ public class ActivityCache {
 	private CurrencyService currencyService;
 	@Autowired
 	private CategoryService defaultCategoryService;
+	@Autowired
+	private ParentService parentService;
 
 	public static void main(String[] args) throws Exception {
 
@@ -41,12 +46,13 @@ public class ActivityCache {
 		} catch (Exception e) {
 			log.error("Exception when inserting default categories.", e);
 		}
-	}	
-	
+	}
+
 	@RequestMapping("/getCategories")
-    public List<Category> getCategories(@RequestParam(value="username") String username, @RequestParam(value="kid") String kid) throws UnknownHostException {
-        return defaultCategoryService.getCategories(username, kid);
-    }
+	public List<Category> getCategories(@RequestParam(value = "username") String username,
+			@RequestParam(value = "kid") String kid) throws UnknownHostException {
+		return defaultCategoryService.getCategories(username, kid);
+	}
 
 	@Autowired
 	private void insertDefaultCurrency() {
@@ -59,4 +65,19 @@ public class ActivityCache {
 		}
 	}
 
+	@RequestMapping("/getKidTasks")
+	public Category getKidTaks(@RequestParam(value = "name") String name) {
+		// mongoDbConfig.getMongoTemplate().fin
+		return null;
+	}
+
+	@RequestMapping("/addParent")
+	public void addParent() throws UnknownHostException {
+		parentService.insertParent();
+	}
+
+	@RequestMapping("/getParent")
+	public Parent getPatent() throws UnknownHostException {
+		return parentService.getParent();
+	}
 }
