@@ -1,24 +1,25 @@
 package com.hackathon.service;
 
-import java.net.UnknownHostException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.MongoTemplate;
-
+import com.hackathon.configuration.MongoDBConfiguration;
 import com.hackathon.model.DefaultCategory;
-import com.mongodb.MongoClient;
 
+@Service
 public class DefaultCategoryService {
+
+	@Autowired
+	private MongoDBConfiguration mongoDbConfig;
 
 	/**
 	 * Inserts default categories.
 	 */
-	public static void insertDefaultCategory() throws UnknownHostException {
-		
-		MongoOperations mongoOps = new MongoTemplate(new MongoClient(), "database");
-		mongoOps.insert(new DefaultCategory("Chore"));
-		mongoOps.insert(new DefaultCategory("School"));
-		mongoOps.insert(new DefaultCategory("Sport"));
+	public void insertDefaultCategory() throws Exception {
+
+		mongoDbConfig.getMongoTemplate().insert(new DefaultCategory("Chore"));
+		mongoDbConfig.getMongoTemplate().insert(new DefaultCategory("School"));
+		mongoDbConfig.getMongoTemplate().insert(new DefaultCategory("Sport"));
 
 	}
 }
