@@ -1,6 +1,8 @@
 package com.hackathon;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,6 +30,8 @@ import com.hackathon.service.TaskService;
 @CrossOrigin
 public class ActivityCache {
 	private static final Log log = LogFactory.getLog(ActivityCache.class);
+	private static final String KID_NAME_1 = "Alex";
+	private static final String KID_NAME_2 = "Raluca";
 
 	@Autowired
 	private ParentService parentService;
@@ -82,6 +86,25 @@ public class ActivityCache {
 		kidService.deleteChildren();
 		kidService.insertChildren();
 		log.info("Cildren successfully inserted.");
+	}
+
+	@Autowired
+	private void insertTask() throws UnknownHostException {
+		List<String> owners = new ArrayList<String>();
+		owners.add(KID_NAME_1);
+		owners.add(KID_NAME_2);
+		taskService.insertTask(new Task(null, "Pick up toys", "", "0.25", "TODO", owners, "Chores"));
+
+		List<String> owners2 = new ArrayList<String>();
+		owners2.add(KID_NAME_1);
+		taskService.insertTask(
+				new Task(null, "Wash teeth before bed for a whole week", "", "0.10", "TODO", owners2, "Health"));
+
+		taskService.insertTask(new Task(null, "Finish homework before supper", "", "1.00", "DONE", owners, "School"));
+
+		List<String> owners3 = new ArrayList<String>();
+		owners3.add(KID_NAME_2);
+		taskService.insertTask(new Task(null, "Bike to school", "", "0.25", "APPROVED", owners3, "Sport"));
 	}
 
 }
