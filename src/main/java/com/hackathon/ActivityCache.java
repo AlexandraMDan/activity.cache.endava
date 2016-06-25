@@ -81,6 +81,12 @@ public class ActivityCache {
 		return kidService.getKidTasks(name);
 	}
 
+	@RequestMapping(value = "/updateTaskByKid", method = RequestMethod.POST)
+	public Task updateTaskByKid(@RequestParam(value = "id") String id, @RequestParam(value = "status") String status)
+			throws UnknownHostException {
+		return taskService.updateTaskByKid(id, status);
+	}
+
 	@Autowired
 	private void insertCildren() throws UnknownHostException {
 		kidService.deleteChildren();

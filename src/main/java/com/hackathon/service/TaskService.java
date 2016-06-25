@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.hackathon.configuration.MongoDBConfiguration;
@@ -24,5 +25,12 @@ public class TaskService {
 		if (task != null && existingTask == null) {
 			mongoDBConfig.getMongoTemplate().insert(task);
 		}
+	}
+
+	public Task updateTaskByKid(String id, String status) throws UnknownHostException {
+		Update update = new Update();
+		update.set("status", status);
+		mongoDBConfig.getMongoTemplate().findAndModify(new Query(where("id").is(id)), update, Task.class);
+		return mongoDBConfig.getMongoTemplate().findOne(new Query(where("id").is(id)), Task.class);
 	}
 }
