@@ -33,4 +33,8 @@ public class Kid {
 		return tasks;
 	}
 
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
+	}
+
 }

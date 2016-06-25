@@ -31,6 +31,10 @@ public class Parent {
 		return children;
 	}
 
+	public void setChildren(List<Kid> children) {
+		this.children = children;
+	}
+
 	public String getSold() {
 		return sold;
 	}

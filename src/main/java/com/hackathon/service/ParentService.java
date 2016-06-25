@@ -4,13 +4,21 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
-
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
 import com.hackathon.configuration.MongoDBConfiguration;
 import com.hackathon.model.Kid;
 import com.hackathon.model.Parent;
@@ -50,17 +58,21 @@ public class ParentService {
 		Query query = Query.query(Criteria.where("username").is(username));
 
 		Parent parent = mongoDBConfig.getMongoTemplate().findOne(query, Parent.class);
+		List<Task> doneTasks = mongoDBConfig.getMongoTemplate().find(new Query(where("status").is("DONE")), Task.class);
+		List<Kid> children = mongoDBConfig.getMongoTemplate().find(new Query(), Kid.class);
 
-		List<Task> doneTasks = new ArrayList<>();
-		if (parent.getTasks() != null) {
-			for (Task task : parent.getTasks()) {
-				if ("DONE".equals(task.getStatus())) {
-					doneTasks.add(task);
+		for (Kid kid : children) {
+			if (kid.getTasks() == null) {
+				kid.setTasks(new ArrayList<>());
+			}
+			for (Task task : doneTasks) {
+				if (task.getOwners().contains(kid.getName())) {
+					kid.getTasks().add(task);
 				}
 			}
 		}
-
-		parent.setTasks(doneTasks);
+		parent.setTasks(new ArrayList<>());
+		parent.setChildren(children);
 
 		return parent;
 	}
