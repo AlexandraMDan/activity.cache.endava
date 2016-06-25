@@ -22,8 +22,10 @@ public class KidService {
 	private MongoDBConfiguration mongoDBConfig;
 
 	public void insertChildren() throws UnknownHostException {
-		mongoDBConfig.getMongoTemplate().insert(new Kid("Alex", "15", new ArrayList<Task>()));
-		mongoDBConfig.getMongoTemplate().insert(new Kid("Raluca", "13", new ArrayList<Task>()));
+		mongoDBConfig.getMongoTemplate()
+				.insert(new Kid("Alex", "15.00", new ArrayList<Task>()));
+		mongoDBConfig.getMongoTemplate()
+				.insert(new Kid("Susan", "13.00", new ArrayList<Task>()));
 	}
 
 	public void deleteChildren() throws UnknownHostException {
@@ -35,4 +37,5 @@ public class KidService {
 		List<Task> tasks = mongoDBConfig.getMongoTemplate().find(new Query(where("owners").regex(name)), Task.class);
 		return new Kid(kid.getName(), kid.getSold(), tasks);
 	}
+
 }

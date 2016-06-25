@@ -33,7 +33,8 @@ import com.hackathon.service.WishlistService;
 public class ActivityCache {
 	private static final Log log = LogFactory.getLog(ActivityCache.class);
 	private static final String KID_NAME_1 = "Alex";
-	private static final String KID_NAME_2 = "Raluca";
+	private static final String KID_NAME_2 = "Susan";
+	private static final String PARENT_USERNAME = "benW";
 
 	@Autowired
 	private ParentService parentService;
@@ -60,7 +61,7 @@ public class ActivityCache {
 	 * "status":"TODO", "owners":["Alex"], "category":"Chores"} <br/>
 	 * <br/>
 	 * {"name":"Pick up toys 2", "description":"", "amount":"2",
-	 * "status":"DONE", "owners":["Alex, Raluca"], "category":"Sport"}
+	 * "status":"DONE", "owners":["Alex, Susan"], "category":"Sport"}
 	 * 
 	 */
 	@CrossOrigin
@@ -76,10 +77,15 @@ public class ActivityCache {
 		return kidService.getKidTasks(name);
 	}
 
+	@CrossOrigin
 	@RequestMapping(value = "/updateTaskByKid", method = RequestMethod.POST)
 	public Task updateTaskByKid(@RequestParam(value = "id") String id, @RequestParam(value = "status") String status)
 			throws UnknownHostException {
-		return taskService.updateTaskByKid(id, status);
+		Task task = taskService.updateTaskById(id, status);
+		if ("APPROVED".equals(status)) {
+			parentService.moveMoney(PARENT_USERNAME, task.getOwners().get(0), task.getAmount());
+		}
+		return task;
 	}
 
 	@CrossOrigin
@@ -87,6 +93,11 @@ public class ActivityCache {
 	public ResponseEntity<WishProduct> insertWishlist(@RequestBody WishProduct product) throws UnknownHostException {
 		wishlistService.insertWishlist(product);
 		return new ResponseEntity<WishProduct>(product, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/getWishlistByUser", method = RequestMethod.GET)
+	public List<WishProduct> getWishlistByUser(@RequestParam(value = "username") String username) throws UnknownHostException {
+		return wishlistService.getWishlistByUser(username);
 	}
 
 	@Autowired
@@ -100,19 +111,15 @@ public class ActivityCache {
 	private void insertTask() throws UnknownHostException {
 		List<String> owners = new ArrayList<String>();
 		owners.add(KID_NAME_1);
-		owners.add(KID_NAME_2);
 		taskService.insertTask(new Task(null, "Pick up toys", "", "0.25", "TODO", owners, "Chores"));
 
 		List<String> owners2 = new ArrayList<String>();
-		owners2.add(KID_NAME_1);
+		owners2.add(KID_NAME_2);
 		taskService.insertTask(
 				new Task(null, "Wash teeth before bed for a whole week", "", "0.10", "TODO", owners2, "Health"));
 
 		taskService.insertTask(new Task(null, "Finish homework before supper", "", "1.00", "DONE", owners, "School"));
-
-		List<String> owners3 = new ArrayList<String>();
-		owners3.add(KID_NAME_2);
-		taskService.insertTask(new Task(null, "Bike to school", "", "0.25", "APPROVED", owners3, "Sport"));
+		taskService.insertTask(new Task(null, "Bike to school", "", "0.25", "APPROVED", owners2, "Sport"));
 	}
 
 	@Autowired

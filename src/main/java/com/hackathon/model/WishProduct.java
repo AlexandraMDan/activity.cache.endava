@@ -8,12 +8,16 @@ public class WishProduct {
 	private String name;
 	private String status;
 	private String price;
+	private String username;
 
 	public WishProduct(@JsonProperty("id") String id, @JsonProperty("name") String name,
-			@JsonProperty("status") String status, @JsonProperty("price") String price) {
+			@JsonProperty("status") String status, @JsonProperty("price") String price,
+			@JsonProperty("username") String username) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
+		this.status = status;
+		this.username = username;
 	}
 
 	public String getId() {
@@ -30,6 +34,10 @@ public class WishProduct {
 
 	public String getPrice() {
 		return price;
+	}
+
+	public String getUsername() {
+		return username;
 	}
 
 }

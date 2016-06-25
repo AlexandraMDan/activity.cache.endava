@@ -1,6 +1,7 @@
 package com.hackathon.service;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
+
 import java.net.UnknownHostException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class TaskService {
 		}
 	}
 
-	public Task updateTaskByKid(String id, String status) throws UnknownHostException {
+	public Task updateTaskById(String id, String status) throws UnknownHostException {
 		Update update = new Update();
 		update.set("status", status);
 		mongoDBConfig.getMongoTemplate().findAndModify(new Query(where("id").is(id)), update, Task.class);

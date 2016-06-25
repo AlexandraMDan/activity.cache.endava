@@ -25,8 +25,8 @@ public class ParentService {
 
 	public void insertParent() throws UnknownHostException {
 		List<Kid> children = new ArrayList<Kid>();
-		Kid kid = new Kid("Alex", "25", new ArrayList<Task>());
-		Kid kid2 = new Kid("Susan", "13", new ArrayList<Task>());
+		Kid kid = new Kid("Alex", "15.00", new ArrayList<Task>());
+		Kid kid2 = new Kid("Susan", "13.00", new ArrayList<Task>());
 
 		children.add(kid);
 		children.add(kid2);
@@ -38,7 +38,7 @@ public class ParentService {
 				Parent.class);
 		if (existingParent == null) {
 			mongoDBConfig.getMongoTemplate()
-					.insert(new Parent("benW", "Ben", "Wilson", children, "1520", new ArrayList<Task>()));
+					.insert(new Parent("benW", "Ben", "Wilson", children, "1520.00", new ArrayList<Task>()));
 		}
 	}
 
@@ -81,8 +81,19 @@ public class ParentService {
 				Kid.class);
 		if (kid != null) {
 			double kidSold = Double.parseDouble(kid.getSold());
+			String newKidSold = String.valueOf(kidSold + amountToBeMoved);
+			List<Kid> kids = new ArrayList<Kid>();
+			for (Kid parentKid : parent.getChildren()) {
+				if (childName.equals(parentKid.getName())) {
+					parentKid.setSold(newKidSold);
+				}
+				kids.add(parentKid);
+			}
+
+			mongoDBConfig.getMongoTemplate().findAndModify(new Query(where("username").is(parentUser)),
+					Update.update("children", kids), Parent.class);
 			mongoDBConfig.getMongoTemplate().updateFirst(Query.query(Criteria.where("name").is(childName)),
-					Update.update("sold", String.valueOf(kidSold + amountToBeMoved)), Parent.class);
+					Update.update("sold", newKidSold), Kid.class);
 		}
 	}
 

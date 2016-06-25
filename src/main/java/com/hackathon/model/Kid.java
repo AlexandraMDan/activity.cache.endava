@@ -24,6 +24,10 @@ public class Kid {
 		return sold;
 	}
 
+	public void setSold(String sold) {
+		this.sold = sold;
+	}
+
 	@Override
 	public String toString() {
 		return "Kid [name=" + name + ", sold=" + sold + ", tasks=" + tasks + "]";
