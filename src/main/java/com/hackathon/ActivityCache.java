@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hackathon.model.Kid;
 import com.hackathon.model.Parent;
 import com.hackathon.model.Task;
+import com.hackathon.model.WishProduct;
 import com.hackathon.service.KidService;
 import com.hackathon.service.ParentService;
 import com.hackathon.service.TaskService;
+import com.hackathon.service.WishlistService;
 
 @SpringBootApplication
 @RestController
@@ -39,15 +41,12 @@ public class ActivityCache {
 	private KidService kidService;
 	@Autowired
 	private TaskService taskService;
+	@Autowired
+	private WishlistService wishlistService;
 
 	public static void main(String[] args) throws Exception {
 
 		SpringApplication.run(ActivityCache.class, args);
-	}
-
-	@RequestMapping("/addParent")
-	public void addParent() throws UnknownHostException {
-		parentService.insertParent();
 	}
 
 	// parentIntro
@@ -64,6 +63,7 @@ public class ActivityCache {
 	 * "status":"DONE", "owners":["Alex, Raluca"], "category":"Sport"}
 	 * 
 	 */
+	@CrossOrigin
 	@RequestMapping(value = "/insertTask", method = RequestMethod.POST)
 	public ResponseEntity<Task> insertTask(@RequestBody Task task) throws UnknownHostException {
 		taskService.insertTask(task);
@@ -82,8 +82,15 @@ public class ActivityCache {
 		return taskService.updateTaskByKid(id, status);
 	}
 
+	@CrossOrigin
+	@RequestMapping(value = "/insertWishlist", method = RequestMethod.POST)
+	public ResponseEntity<WishProduct> insertWishlist(@RequestBody WishProduct product) throws UnknownHostException {
+		wishlistService.insertWishlist(product);
+		return new ResponseEntity<WishProduct>(product, HttpStatus.OK);
+	}
+
 	@Autowired
-	private void insertCildren() throws UnknownHostException {
+	private void insertChildren() throws UnknownHostException {
 		kidService.deleteChildren();
 		kidService.insertChildren();
 		log.info("Cildren successfully inserted.");
@@ -106,6 +113,11 @@ public class ActivityCache {
 		List<String> owners3 = new ArrayList<String>();
 		owners3.add(KID_NAME_2);
 		taskService.insertTask(new Task(null, "Bike to school", "", "0.25", "APPROVED", owners3, "Sport"));
+	}
+
+	@Autowired
+	public void addParentOnStartUp() throws UnknownHostException {
+		parentService.insertParent();
 	}
 
 }

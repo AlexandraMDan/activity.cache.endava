@@ -25,8 +25,8 @@ public class ParentService {
 
 	public void insertParent() throws UnknownHostException {
 		List<Kid> children = new ArrayList<Kid>();
-		Kid kid = new Kid("Alex", "15", new ArrayList<Task>());
-		Kid kid2 = new Kid("Raluca", "13", new ArrayList<Task>());
+		Kid kid = new Kid("Alex", "25", new ArrayList<Task>());
+		Kid kid2 = new Kid("Susan", "13", new ArrayList<Task>());
 
 		children.add(kid);
 		children.add(kid2);
@@ -34,12 +34,12 @@ public class ParentService {
 		List<String> owners = new ArrayList<String>();
 		owners.add(kid.getName());
 
-		List<Task> tasks = new ArrayList<Task>();
-		Task task = new Task("1", "Pick up toys", "", "100", "TODO", owners, "Sport");
-		tasks.add(task);
-		tasks.add(new Task("2", "Pick up toys 2", "", "100", "DONE", owners, "Chores"));
-
-		mongoDBConfig.getMongoTemplate().insert(new Parent("popescui", "I", "Popescu", children, "1520", tasks));
+		Parent existingParent = mongoDBConfig.getMongoTemplate().findOne(new Query(where("username").is("benW")),
+				Parent.class);
+		if (existingParent == null) {
+			mongoDBConfig.getMongoTemplate()
+					.insert(new Parent("benW", "Ben", "Wilson", children, "1520", new ArrayList<Task>()));
+		}
 	}
 
 	public Parent getParent(String username) throws UnknownHostException {
